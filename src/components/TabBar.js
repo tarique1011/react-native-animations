@@ -1,12 +1,16 @@
 import React from 'react';
-import {View, Text, TouchableWithoutFeedback, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  Platform,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Animated, {
   useSharedValue,
-  useDerivedValue,
   useAnimatedStyle,
   withTiming,
-  color,
 } from 'react-native-reanimated';
 
 const SCREEN_WIDTH = Dimensions.get('window').width - 80;
@@ -52,18 +56,14 @@ const TabBar = ({state, descriptors, navigation}) => {
 
         return (
           <Tabs
-            index={index}
-            state={state}
-            isFocused={isFocused}
-            options={options}
-            onPress={onPress}
-            label={label}
+            key={label}
+            {...{index, state, isFocused, options, onPress, label}} 
           />
         );
       })}
     </View>
   );
-}
+};
 
 const Tabs = ({label, isFocused, options, onPress, state, index}) => {
   const width = useSharedValue(SCREEN_WIDTH * 0.2);
@@ -116,7 +116,10 @@ const Tabs = ({label, isFocused, options, onPress, state, index}) => {
           style={[
             styles.label,
             labelAnimatedStyle,
-            {transform: [{scale: scale.value}], color: isFocused ? colors[index].bold : 'black'},
+            {
+              transform: [{scale: scale.value}],
+              color: isFocused ? colors[index].bold : 'black',
+            },
           ]}>
           {label}
         </Animated.Text>
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
     paddingTop: 15,
-    paddingBottom: 30,
+    paddingBottom: Platform.OS === 'ios' ? 30 : 10,
     paddingHorizontal: 20,
     shadowOffset: {
       height: -1,
