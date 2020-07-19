@@ -57,7 +57,7 @@ const TabBar = ({state, descriptors, navigation}) => {
         return (
           <Tabs
             key={label}
-            {...{index, state, isFocused, options, onPress, label}} 
+            {...{index, state, isFocused, options, onPress, label}}
           />
         );
       })}
