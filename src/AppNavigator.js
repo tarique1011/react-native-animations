@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {TabBarComponent} from './components';
 import ListComponent from './ListComponent';
 
@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{...TransitionPresets.SlideFromRightIOS}}>
       <Stack.Screen
         name="List"
         component={ListComponent}

@@ -5,27 +5,30 @@ import {
   FlatList,
   StyleSheet,
   TouchableWithoutFeedback,
+  SafeAreaView,
 } from 'react-native';
 
 const items = [{name: 'TabBar', label: 'Animating Tab Bar'}];
 
 const ListComponent = ({navigation}) => {
   return (
-    <View style={styles.mainContainer}>
-      <FlatList
-        data={items}
-        renderItem={({item}) => (
-          <TouchableWithoutFeedback
-            onPress={() => navigation.navigate(item.name)}>
-            <View style={styles.listContainer}>
-              <Text style={styles.listLabel}>{item.label}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        keyExtractor={(item) => item.name}
-      />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.mainContainer}>
+        <FlatList
+          data={items}
+          renderItem={({item}) => (
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate(item.name)}>
+              <View style={styles.listContainer}>
+                <Text style={styles.listLabel}>{item.label}</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          )}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          keyExtractor={(item) => item.name}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
